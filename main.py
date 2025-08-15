@@ -51,7 +51,7 @@ async def search_command(page: Page, project_name: str, search_terms: list[str])
     print(CONFIG["messages"]["info"]["project_page_loaded"])
 
     for term in search_terms:
-        await search_and_save(page, term)
+        await search_and_save(page, project_name, term)
 
 async def main():
     """Main function to orchestrate the automation."""

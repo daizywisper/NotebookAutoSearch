@@ -14,7 +14,7 @@ def sanitize_filename(name):
     # Truncate to a reasonable length
     return name[:100]
 
-async def search_and_save(page, search_term):
+async def search_and_save(page, project_name, search_term):
     """Performs a search and saves the result."""
     print(CONFIG["messages"]["info"]["starting_search"].format(search_term))
 
@@ -90,8 +90,9 @@ async def search_and_save(page, search_term):
     file_content += "\n---\n" # 区切り線を追加
 
     timestamp = datetime.now().strftime("%Y%m%d")
-    safe_file_name = sanitize_filename(search_term)
-    file_path = CONFIG["paths"]["output_dir"] / f"{timestamp}_{safe_file_name}.md"
+    safe_project_name = sanitize_filename(project_name)
+    safe_search_term = sanitize_filename(search_term)
+    file_path = CONFIG["paths"]["output_dir"] / f"{timestamp}_{safe_project_name}_{safe_search_term}.md"
 
     CONFIG["paths"]["output_dir"].mkdir(exist_ok=True)
     with open(file_path, "w", encoding="utf-8") as f:
