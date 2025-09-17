@@ -6,7 +6,7 @@ project_root = Path(__file__).parent
 CONFIG = {
     "paths": {
         "project_root": project_root,
-        "user_data_dir": project_root / "user_data",
+        "user_data_dir": project_root / ".secure" / "user_data",
         "output_dir": project_root / "output",
         "error_screenshot": "error.png",
     },
@@ -15,8 +15,8 @@ CONFIG = {
     },
     "selectors": {
         "project_button": "project-button",
-        "project_title": lambda project_name: f'span.project-button-title:has-text("{project_name}")', 
-        "search_box": 'textarea[placeholder="入力を開始します..."]',
+        "project_title": lambda project_name: f'span.project-button-title:has-text("{project_name}")',
+        "search_box": 'textarea[aria-label="クエリボックス"]',
         "send_button": 'button[aria-label="送信"]',
         "result_message_card": "mat-card.to-user-message-card-content",
         "message_text_content": "div.message-text-content",
@@ -25,12 +25,12 @@ CONFIG = {
     "timeouts": {
         "login": 300000,  # 5 minutes for manual login
         "default": 90000,
-        "stabilization": 30000,
+        "stabilization": 90000,
         "stabilization_interval": 1000,
         "wait_for_visible": 60000,
     },
     "stability": {
-        "required_stable_iterations": 3,
+        "required_stable_iterations": 5,
     },
     "messages": {
         "info": {
@@ -70,7 +70,7 @@ CONFIG = {
         "error": {
             "login_missing": """
 エラー: ログイン情報が見つかりません。
-先に 'python main.py --setup' を実行して、ログインを完了させてください。
+先に 'python main.py setup' を実行して、ログインを完了させてください。
 """,
             "search_terms_missing": """
 エラー: プロジェクト名に加えて、1つ以上の検索したい言葉を指定してください。

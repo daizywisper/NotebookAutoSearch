@@ -36,7 +36,7 @@ playwright install
 
 ### 2. 初回セットアップ
 
-以下のコマンドを実行して、ブラウザでGoogleアカウントにログインします。認証情報が `user_data` ディレクトリに保存されます。
+以下のコマンドを実行して、ブラウザでGoogleアカウントにログインします。認証情報が `./secure/user_data` ディレクトリに保存されます。
 
 ```bash
 python main.py setup

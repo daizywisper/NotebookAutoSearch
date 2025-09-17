@@ -20,10 +20,11 @@ async def search_and_save(page, project_name, search_term):
 
     print(CONFIG["messages"]["info"]["wait_for_search_box"])
     await page.wait_for_selector(CONFIG["selectors"]["search_box"])
+    await asyncio.sleep(0.5) # Add a small delay
 
     print(CONFIG["messages"]["info"]["filling_search_box"].format(search_term))
-    await page.fill(CONFIG["selectors"]["search_box"], "")
-    await page.fill(CONFIG["selectors"]["search_box"], search_term)
+    await page.fill(CONFIG["selectors"]["search_box"], "") # Clear the box
+    await page.type(CONFIG["selectors"]["search_box"], search_term) # Type the search term
 
     print(CONFIG["messages"]["info"]["clicking_send"])
     await page.wait_for_selector(CONFIG["selectors"]["send_button"])
@@ -66,7 +67,7 @@ async def search_and_save(page, project_name, search_term):
     cleaned_lines = []
     for line in result_text.split('\n'):
         # Remove trailing reference numbers (e.g., "1:", "1.", " [1]")
-        line = re.sub(r'\s*\d+[:.]?$', '', line).strip()
+        line = re.sub(r'\s*\d+[:.]?','', line).strip()
         line = re.sub(r'\[\d+\]', '', line).strip()
         # Remove leading list numbers (e.g., "1. ")
         line = re.sub(r'^\s*\d+\.\s*', '', line).strip()

@@ -2,5 +2,11 @@ user_data/
 output/
 __pycache__/
 *.pyc
-error.png
+*.png
 *ipynb
+*.secure
+*.mp4
+*.DS_Store
+*.pptx
+*.gemini
+
